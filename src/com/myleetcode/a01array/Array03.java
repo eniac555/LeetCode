@@ -14,6 +14,7 @@ public class Array03 {
         }
     }
 
+    //左右指针，从后往前存新数组的值
     public static int[] sortedSquares(int[] nums) {
         int[] result = new int[nums.length];
         int left = 0;
@@ -22,7 +23,7 @@ public class Array03 {
         while (left <= right) {
             if (nums[left] * nums[left] > nums[right] * nums[right]) {
                 // 正数的相对位置是不变的， 需要调整的是负数平方后的相对位置
-                result[index] = nums[left] * nums[left];
+                result[index] = nums[left] * nums[left];//从后往前进行存值
                 index--;
                 left++;
             }

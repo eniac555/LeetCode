@@ -14,17 +14,17 @@ public class Array04 {
         System.out.println(len);
     }
 
-    //滑动窗口法
+    //滑动窗口法--双指针
     public static int minSubArrayLen(int target, int[] nums) {
         int left = 0;
         int right = 0;
         int sum = 0;
-        int result = Integer.MAX_VALUE;
+        int result = Integer.MAX_VALUE;//初始化的结果记录器
         while (right < nums.length) {
             sum = sum + nums[right];
             while (sum >= target) {
-                sum = sum - nums[left];
-                result = Math.min(result, right - left + 1);
+                sum = sum - nums[left];//减掉最左侧元素，下次循环再加上最右侧
+                result = Math.min(result, right - left + 1);//重置结果记录器，拿当前满足条件的长度和原来比较
                 left++;
             }
             right++;

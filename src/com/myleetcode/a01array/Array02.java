@@ -10,10 +10,11 @@ public class Array02 {
         int[] arr = {-1, 0, 3, 5, 9, 12, 5, 6, 3};
         int i = removeElement(arr, 3);
         System.out.println(i);
+
     }
 
 
-    //双指针，快指针也就是右指针进行遍历元素，左指针用于记录元素位置
+    //双指针，右指针进行遍历元素并判断，左指针用于保存元素
     public static int removeElement(int[] nums, int val) {
         int left = 0;
         for (int right = 0; right < nums.length; right++) {
