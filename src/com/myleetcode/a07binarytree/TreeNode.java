@@ -2,7 +2,7 @@ package com.myleetcode.a07binarytree;
 
 
 /**
- * 定义树节点类
+ * 定义二叉树树节点类
  */
 public class TreeNode {
     int val;
