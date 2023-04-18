@@ -13,22 +13,18 @@ public class Tree11_03 {
      * 时间复杂度：O(n)
      */
     public boolean isBalanced(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
+        if (root == null) return true;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode pre = null;
         while (root != null || !stack.isEmpty()) {
             while (root != null) {
                 stack.push(root);
-                root = root.left;
+                root = root.left;//把左节点都push进去
             }
             TreeNode inNode = stack.peek();
-            // 右结点为null或已经遍历过
-            if (inNode.right == null || inNode.right == pre) {
-                // 输出
+            if (inNode.right == null || inNode.right == pre) {// 右结点为null或已经遍历过
                 if (Math.abs(getHeight(inNode.left) - getHeight(inNode.right)) > 1) {
-                    return false;
+                    return false;// 输出
                 }
                 stack.pop();
                 pre = inNode;
