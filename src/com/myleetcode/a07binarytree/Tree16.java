@@ -111,7 +111,7 @@ public class Tree16 {
     public List<List<Integer>> pathSum4(TreeNode root, int targetSum) {
         //存结果
         List<List<Integer>> result = new ArrayList<>();
-        //存路径上的每个节点和其父节点
+        //存路径上的每个节点和其父节点，即所有的父子关系
         Map<TreeNode, TreeNode> map = new HashMap<>();
         if (root == null) return result;
         //存储节点
