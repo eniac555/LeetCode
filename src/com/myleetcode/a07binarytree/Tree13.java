@@ -16,7 +16,7 @@ public class Tree13 {
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
         while (!queue.isEmpty()) {
-            int size = queue.size();
+            int size = queue.size();//不需要计算len，因为叶子节点可以出现在不同层，并且判定条件是左右子树为空
             while (size-- > 0) {
                 TreeNode node = queue.poll();
                 if (node.left != null) { // 左节点不为空

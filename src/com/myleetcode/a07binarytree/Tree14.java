@@ -14,7 +14,7 @@ public class Tree14 {
         int result = 0;
         queue.offer(root);
         while (!queue.isEmpty()) {
-            int len = queue.size();
+            int len = queue.size();//需要统计最后一层，所以用len
             for (int i = 0; i < len; i++) {
                 TreeNode node = queue.poll();
                 //每一层的第一个节点的值都拿出来，最后一次循环的值就是想要的结果

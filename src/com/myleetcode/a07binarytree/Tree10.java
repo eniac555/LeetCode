@@ -25,7 +25,7 @@ public class Tree10 {
         queue.offer(root);
         int count = 0;
         while (!queue.isEmpty()) {
-            int len = queue.size();
+            int len = queue.size();//不需要统计层数
             while (len > 0) {
                 count++;
                 TreeNode node = queue.poll();

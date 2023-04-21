@@ -22,7 +22,7 @@ public class Tree09 {
         queue.offer(root);
         int depth = 0;
         while (!queue.isEmpty()) {
-            int len = queue.size();
+            int len = queue.size();//需要统计层数，得分层遍历
             depth++;
             while (len > 0) {
                 TreeNode node = queue.poll();

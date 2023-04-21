@@ -20,7 +20,7 @@ public class Tree12 {
         //节点和元素值同时入栈
         stack.push(root);
         stack.push(root.val + "");
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty()) {//不需要分层，所以没有计算len
             // 节点和路径同时出栈
             String path = (String) stack.pop();
             TreeNode node = (TreeNode) stack.pop();

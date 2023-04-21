@@ -56,7 +56,7 @@ public class Tree15 {
         stack1.push(root);
         stack2.push(root.val);
         while (!stack1.isEmpty()) {
-            int len = stack1.size();
+            int len = stack1.size();//没必要，不用统计第几层，深度或者高度
             for (int i = 0; i < len; i++) {
                 TreeNode node = stack1.pop();
                 int sum = stack2.pop();

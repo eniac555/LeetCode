@@ -19,7 +19,7 @@ public class Tree08 {
         int depth = 0;
         while (!queue.isEmpty()) {
             depth++;
-            int len = queue.size();
+            int len = queue.size();//需要统计层数，得分层遍历
             while (len > 0) {
                 Node node = queue.poll();
                 for (int i = 0; i < node.children.size(); i++) {

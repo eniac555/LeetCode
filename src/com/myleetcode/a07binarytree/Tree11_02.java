@@ -51,7 +51,7 @@ public class Tree11_02 {
         deque.offer(root);
         int depth = 0;
         while (!deque.isEmpty()) {
-            int size = deque.size();
+            int size = deque.size();//需要，因为要计算高度
             depth++;
             for (int i = 0; i < size; i++) {
                 TreeNode poll = deque.poll();

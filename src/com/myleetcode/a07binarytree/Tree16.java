@@ -41,13 +41,13 @@ public class Tree16 {
 
 
     //迭代
-    List<List<Integer>> ret = new LinkedList<List<Integer>>();
-    Map<TreeNode, TreeNode> map = new HashMap<TreeNode, TreeNode>();
+    List<List<Integer>> ret = new LinkedList<>();
+    Map<TreeNode, TreeNode> map = new HashMap<>();
 
     public List<List<Integer>> pathSum2(TreeNode root, int targetSum) {
         if (root == null) return ret;
-        Queue<TreeNode> queueNode = new LinkedList<TreeNode>();
-        Queue<Integer> queueSum = new LinkedList<Integer>();
+        Queue<TreeNode> queueNode = new LinkedList<>();
+        Queue<Integer> queueSum = new LinkedList<>();
         queueNode.offer(root);
         queueSum.offer(0);
 
@@ -75,19 +75,19 @@ public class Tree16 {
     }
 
     public void getPath(TreeNode node) {
-        List<Integer> temp = new LinkedList<Integer>();
+        List<Integer> temp = new LinkedList<>();
         while (node != null) {
             temp.add(node.val);
             node = map.get(node);
         }
         Collections.reverse(temp);
-        ret.add(new LinkedList<Integer>(temp));
+        ret.add(new LinkedList<>(temp));
     }
 
 
     //深度优先遍历
-    List<List<Integer>> ret2 = new LinkedList<List<Integer>>();
-    Deque<Integer> path = new LinkedList<Integer>();
+    List<List<Integer>> ret2 = new LinkedList<>();
+    Deque<Integer> path = new LinkedList<>();
 
     public List<List<Integer>> pathSum3(TreeNode root, int targetSum) {
         dfs(root, targetSum);
@@ -99,11 +99,58 @@ public class Tree16 {
         path.offerLast(root.val);
         targetSum -= root.val;
         if (root.left == null && root.right == null && targetSum == 0) {
-            ret2.add(new LinkedList<Integer>(path));
+            ret2.add(new LinkedList<>(path));
         }
         dfs(root.left, targetSum);
         dfs(root.right, targetSum);
         path.pollLast();
+    }
+
+
+    //层序遍历迭代
+    public List<List<Integer>> pathSum4(TreeNode root, int targetSum) {
+        //存结果
+        List<List<Integer>> result = new ArrayList<>();
+        //存路径上的每个节点和其父节点
+        Map<TreeNode, TreeNode> map = new HashMap<>();
+        if (root == null) return result;
+        //存储节点
+        Queue<TreeNode> queue1 = new LinkedList<>();
+        //存储当前节点目前的累加和
+        Queue<Integer> queue2 = new LinkedList<>();
+        queue1.offer(root);
+        queue2.offer(0);
+
+        //层序遍历的部分设置len是因为要分层返回节点的值，这里不需要
+        while (!queue1.isEmpty()) {
+            TreeNode node = queue1.poll();
+            int sum = queue2.poll() + node.val;
+            if (node.left == null && node.right == null) {
+                if (sum == targetSum) {
+                    //满足条件，执行插入结果的代码
+                    List<Integer> temp = new LinkedList<>();
+                    while (node != null) {
+                        temp.add(node.val);
+                        node = map.get(node);
+                    }
+                    Collections.reverse(temp);
+                    result.add(new LinkedList<>(temp));
+                }
+            } else {
+                if (node.left != null) {
+                    map.put(node.left, node);
+                    queue1.offer(node.left);
+                    queue2.offer(sum);
+                }
+                if (node.right != null) {
+                    map.put(node.right, node);
+                    queue1.offer(node.right);
+                    queue2.offer(sum);
+                }
+            }
+        }
+        return result;
+
     }
 
 
