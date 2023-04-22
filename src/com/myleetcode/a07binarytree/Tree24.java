@@ -88,6 +88,7 @@ public class Tree24 {
                     result.clear();
                     result.add(cur.val);
                 } else if (count == maxCount) {
+                    //可能不止一个众数，最后结果存的是众数的集合，每组众数只取一个元素
                     result.add(cur.val);
                 }
                 pre = cur;
@@ -95,5 +96,38 @@ public class Tree24 {
             }
         }
         return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+
+    public int[] findMode3(TreeNode root) {
+        TreeNode pre = null;
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> list = new ArrayList<>();
+        int count = 0;
+        int maxCount = 0;
+        TreeNode cur = root;
+        while (!stack.isEmpty() || cur != null) {
+            if (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            } else {
+                cur = stack.pop();
+                if (pre == null || pre.val != cur.val) {
+                    count = 1;
+                } else {
+                    count++;
+                }
+                if (count > maxCount) {
+                    maxCount = count;
+                    list.clear();
+                    list.add(cur.val);
+                } else if (count == maxCount) {
+                    list.add(cur.val);
+                }
+                pre = cur;
+                cur = cur.right;
+            }
+        }
+        return list.stream().mapToInt(Integer::intValue).toArray();
     }
 }
