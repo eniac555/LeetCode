@@ -60,7 +60,7 @@ public class A01Index {
 
      Tree28:删除二叉搜索树中的节点
 
-     Tree28:修剪二叉搜索树
+     Tree29:修剪二叉搜索树
 
      Tree30:将有序数组转换为二叉搜索树
 

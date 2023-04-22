@@ -5,6 +5,10 @@ package com.myleetcode.a07binarytree;
  */
 public class Tree26 {
 
+    /*
+    核心：从上向下去递归遍历，第一次遇到 cur节点是数值在[p, q]区间中，那么cur就是 p和q的最近公共祖先。
+     */
+
     //递归---极其好理解
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (p.val > root.val && q.val > root.val) return lowestCommonAncestor(root.right, p, q);
