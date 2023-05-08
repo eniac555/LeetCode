@@ -1,4 +1,4 @@
-package com.myleetcode.a08recall;
+package com.myleetcode.a08backtracking;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -9,7 +9,7 @@ import java.util.List;
  * <p>
  * 示例: 输入: n = 4, k = 2 输出: [ [2,4], [3,4], [2,3], [1,2], [1,3], [1,4], ]
  */
-public class Recall01 {
+public class Backtracking01 {
 
     //定义两个全局变量，一个用来存放符合条件单一结果，一个用来存放符合条件结果的集合
     List<List<Integer>> result = new ArrayList<>();
@@ -31,7 +31,7 @@ public class Recall01 {
             result.add(new ArrayList<>(path));
             return;
         }
-        for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) {
+        for (int i = startIndex; i <= n - (k - path.size()) + 1; i++) {//剪枝
             path.add(i);
             combineHelper(n, k, i + 1);
             path.removeLast();
