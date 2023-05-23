@@ -21,6 +21,7 @@ public class Backtracking07 {
     Deque<String> deque = new LinkedList<>();
 
     public List<List<String>> partition(String s) {
+
         backTracking(s, 0);
         return lists;
     }
@@ -28,16 +29,16 @@ public class Backtracking07 {
     private void backTracking(String s, int startIndex) {
         //如果起始位置大于s的大小，说明找到了一组分割方案
         if (startIndex >= s.length()) {
-            lists.add(new ArrayList(deque));
+            lists.add(new ArrayList<>(deque));
             return;
         }
         for (int i = startIndex; i < s.length(); i++) {
             //如果是回文子串，则记录
             if (isPalindrome(s, startIndex, i)) {
-                String str = s.substring(startIndex, i + 1);
+                String str = s.substring(startIndex, i + 1);//substring 左闭右开
                 deque.addLast(str);
             } else {
-                continue;
+                continue;//如果不是回文子串，就再回到循环开始，i++，这里改变了子串长度
             }
             //起始位置后移，保证不重复
             backTracking(s, i + 1);

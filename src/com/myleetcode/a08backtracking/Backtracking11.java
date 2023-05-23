@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class Backtracking11 {
 
-    private List<Integer> path = new ArrayList<>();
-    private List<List<Integer>> res = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
+    List<List<Integer>> res = new ArrayList<>();
 
     public List<List<Integer>> findSubsequences(int[] nums) {
         backtracking(nums, 0);
@@ -33,7 +33,7 @@ public class Backtracking11 {
             res.add(new ArrayList<>(path));
         }
 
-        int[] used = new int[201];
+        int[] used = new int[201];//标记数组，限定了数组元素大小为-100-100,其实作用和哈希表一样
         for (int i = start; i < nums.length; i++) {
             if (!path.isEmpty() && nums[i] < path.get(path.size() - 1) ||
                     (used[nums[i] + 100] == 1)) continue;

@@ -35,9 +35,9 @@ public class Backtracking08 {
         return result;
     }
 
-    // startIndex: 搜索的起始位置， pointNum:添加逗点的数量
+    // startIndex: 搜索的起始位置， pointNum:添加逗号的数量
     private void backTrack(String s, int startIndex, int pointNum) {
-        if (pointNum == 3) {// 逗点数量为3时，分隔结束
+        if (pointNum == 3) {// 逗号数量为3时，分隔结束
             // 判断第四段⼦字符串是否合法，如果合法就放进result中
             if (isValid(s, startIndex, s.length() - 1)) {
                 result.add(s);
@@ -46,11 +46,11 @@ public class Backtracking08 {
         }
         for (int i = startIndex; i < s.length(); i++) {
             if (isValid(s, startIndex, i)) {
-                s = s.substring(0, i + 1) + "." + s.substring(i + 1);    //在str的后⾯插⼊⼀个逗点
+                s = s.substring(0, i + 1) + "." + s.substring(i + 1);    //在str的后⾯插⼊⼀个逗号
                 pointNum++;
-                backTrack(s, i + 2, pointNum);// 插⼊逗点之后下⼀个⼦串的起始位置为i+2
+                backTrack(s, i + 2, pointNum);// 插⼊逗号之后下⼀个⼦串的起始位置为i+2
                 pointNum--;// 回溯
-                s = s.substring(0, i + 1) + s.substring(i + 2);// 回溯删掉逗点
+                s = s.substring(0, i + 1) + s.substring(i + 2);// 回溯删掉逗号
             } else {
                 break;
             }
