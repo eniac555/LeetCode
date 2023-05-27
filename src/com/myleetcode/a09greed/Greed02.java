@@ -49,5 +49,5 @@ public class Greed02 {
         return count;
     }
 
-    
+
 }
