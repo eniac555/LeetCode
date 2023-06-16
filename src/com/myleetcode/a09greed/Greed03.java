@@ -17,6 +17,8 @@ public class Greed03 {
         if (nums.length == 1) {
             return nums[0];
         }
+        //遍历 nums，从头开始用 count 累积，如果 count 一旦加上 nums[i]变为负数，
+        //那么就应该从 nums[i+1]开始从 0 累积 count 了，因为已经变为负数的 count，只会降低总和
         int sum = Integer.MIN_VALUE;
         int count = 0;
         for (int num : nums) {
