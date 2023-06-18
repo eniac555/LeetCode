@@ -9,6 +9,12 @@ import java.util.LinkedList;
  * @description:
  */
 public class Greed11 {
+    /**
+     * 1.身高从大到小排（身高相同k小的站前面）
+     * 2.按照k值插入就行，把k值作为索引
+     * @param people [身高，前面有多少人身高>=自己]
+     * @return 重排列的数组
+     */
     public int[][] reconstructQueue(int[][] people) {
         // 身高从大到小排（身高相同k小的站前面）
         Arrays.sort(people, (a, b) -> {
@@ -19,7 +25,9 @@ public class Greed11 {
         });
 
         LinkedList<int[]> que = new LinkedList<>();
+        LinkedList<Integer> list = new LinkedList<>();
 
+        //按照k值插入就行，把k值作为索引
         for (int[] p : people) {
             que.add(p[1], p);
             //LinkedList.add(index, value)，会将value插入到指定index中

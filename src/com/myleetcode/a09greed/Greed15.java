@@ -11,10 +11,13 @@ import java.util.List;
  */
 public class Greed15 {
 
+    //倾向于第一种
     public int[][] merge(int[][] intervals) {
+
         List<int[]> res = new LinkedList<>();
         //按照左边界排序
         Arrays.sort(intervals, (x, y) -> Integer.compare(x[0], y[0]));
+
         //initial start 是最小左边界
         int start = intervals[0][0];
         int rightmostRightBound = intervals[0][1];
@@ -36,9 +39,11 @@ public class Greed15 {
 
 
     public int[][] merge2(int[][] intervals) {
+
         LinkedList<int[]> res = new LinkedList<>();
         Arrays.sort(intervals, (o1, o2) -> Integer.compare(o1[0], o2[0]));
         res.add(intervals[0]);
+
         for (int i = 1; i < intervals.length; i++) {
             if (intervals[i][0] <= res.getLast()[1]) {
                 int start = res.getLast()[0];
