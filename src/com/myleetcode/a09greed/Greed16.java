@@ -31,12 +31,15 @@ public class Greed16 {
         String s = String.valueOf(n);
         char[] chars = s.toCharArray();
         int start = s.length();
+
+        //找到最靠前（左）的应该改成9的位置
         for (int i = s.length() - 2; i >= 0; i--) {
             if (chars[i] > chars[i + 1]) {
                 chars[i]--;
                 start = i + 1;
             }
         }
+        //根据前面找到的位置，把后面每一位元素都置为9
         for (int i = start; i < s.length(); i++) {
             chars[i] = '9';
         }
