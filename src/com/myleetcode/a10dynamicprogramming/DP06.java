@@ -23,4 +23,17 @@ public class DP06 {
         }
         return dp[n];
     }
+
+
+    public int integerBreak2(int n) {
+        //arr[i]表示数字i拆分后的最大乘积
+        int[] arr = new int[n + 1];
+        arr[2] = 1;
+        for (int i = 3; i <= n; i++) {
+            for (int j = 1; j < i; j++) {
+                arr[i] = Math.max(arr[i], Math.max(j * (i - j), j * arr[i - j]));
+            }
+        }
+        return arr[n];
+    }
 }

@@ -23,4 +23,17 @@ public class DP07 {
         return dp[n];
     }
 
+
+    public int numTrees2(int n) {
+        //这题不好想啊，递推公式不一定能想出来，不一定能想到动态规划
+        int[] arr = new int[n + 1];
+        arr[0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= i; j++) {
+                arr[i] = arr[i] + arr[j - 1] * arr[i - j];
+            }
+        }
+        return arr[n];
+    }
+
 }
