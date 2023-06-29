@@ -9,6 +9,13 @@ import java.util.Arrays;
  */
 public class DP32 {
 
+    /*
+    1.dp[i]：以下标i为结尾的连续递增的子序列长度为dp[i]。
+    2.dp[i] = dp[i - 1] + 1;
+    3.以下标i为结尾的连续递增的子序列长度最少也应该是1，即就是nums[i]这一个元素。
+    4.从递推公式上可以看出， dp[i + 1]依赖dp[i]，所以一定是从前向后遍历。
+     */
+
     // 动态规划
     public static int findLengthOfLCIS(int[] nums) {
         int[] dp = new int[nums.length];
