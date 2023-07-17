@@ -1,4 +1,4 @@
-package com.myleetcode.a13adapter;
+package com.myleetcode.a15adapter;
 
 /**
  * @author eniac555
