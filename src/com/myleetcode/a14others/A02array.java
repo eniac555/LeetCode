@@ -1,4 +1,4 @@
-package com.myleetcode.a12others;
+package com.myleetcode.a14others;
 
 /**
  * @author eniac555
