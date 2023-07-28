@@ -1,12 +1,10 @@
 package com.myleetcode.a12graphsearch;
 
-import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * @author eniac555
  * @date 2023/7/19
- * @description: 岛屿数量
+ * @description: 岛屿数量 —— 深度优先搜索
  */
 public class Graph02 {
     /*
@@ -20,58 +18,66 @@ public class Graph02 {
     思路：遇到一个没有遍历过的节点陆地，计数器就加1，然后把该节点陆地所能遍历到(相邻)的陆地都标记上。
      */
 
-    private final static int[][] DIRECTIONS = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
-    private int rows;
-    private int cols;
-    private char[][] grid;
-    private boolean[][] visited;
-
+    //方法1
+    //为了统计岛屿数量同时不重复记录，每当我们搜索到一个岛后，就将这个岛 “淹没” —— 将这个岛所占的地方从 “1” 改为 “0”，
+    //这样就不用担心后续会重复记录这个岛屿了。而 DFS 的过程就体现在 “淹没” 这一步中。
     public int numIslands(char[][] grid) {
-        rows = grid.length;
-        if (rows == 0) {
-            return 0;
+        int result = 0;//记录找到的岛屿数量
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][i] == '1') {//找到“1”，res加一，同时淹没这个岛
+                    result++;
+                    dfs(grid, i, j);
+                }
+            }
         }
-        cols = grid[0].length;
-        this.grid = grid;
-        visited = new boolean[rows][cols];
+        return result;
+    }
 
-        int count = 0;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
+    //使用DFS“淹没”岛屿
+    public void dfs(char[][] grid, int i, int j) {
+        //搜索边界：索引越界或遍历到了"0"
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] == '0') return;
+        //将这块土地标记为"0"
+        grid[i][j] = '0';
+        //根据"每座岛屿只能由水平方向或竖直方向上相邻的陆地连接形成"，对上下左右的相邻顶点进行dfs
+        dfs(grid, i - 1, j);
+        dfs(grid, i + 1, j);
+        dfs(grid, i, j + 1);
+        dfs(grid, i, j - 1);
+    }
+
+
+    //方法2
+    boolean[][] visited;
+    int[][] direction = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    public int numIslands2(char[][] grid) {
+        int result = 0;
+        visited = new boolean[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (!visited[i][j] && grid[i][j] == '1') {
-                    bfs(i, j);
-                    count++;
+                    result++;
+                    dfs2(grid, i, j);
                 }
             }
         }
-        return count;
+        return result;
     }
 
-    private void bfs(int i, int j) {
-        Queue<Integer> queue = new LinkedList<>();
-        queue.offer(i * cols + j);
-        // 注意：这里要标记上已经访问过
+    private void dfs2(char[][] grid, int i, int j) {
+        if (visited[i][j] || grid[i][j] == '0')
+            return;
+
         visited[i][j] = true;
-        while (!queue.isEmpty()) {
-            int cur = queue.poll();
-            int curX = cur / cols;
-            int curY = cur % cols;
-            for (int k = 0; k < 4; k++) {
-                int newX = curX + DIRECTIONS[k][0];
-                int newY = curY + DIRECTIONS[k][1];
-                if (inArea(newX, newY) && grid[newX][newY] == '1' && !visited[newX][newY]) {
-                    queue.offer(newX * cols + newY);
-                    // 特别注意：在放入队列以后，要马上标记成已经访问过，语义也是十分清楚的：反正只要进入了队列，迟早都会遍历到它
-                    // 而不是在出队列的时候再标记，如果是出队列的时候再标记，会造成很多重复的结点进入队列，造成重复的操作，这句话如果你没有写对地方，代码会严重超时的
-                    visited[newX][newY] = true;
-                }
-            }
+        for (int k = 0; k < 4; k++) {
+            int next_i = i + direction[k][0];
+            int next_j = j + direction[k][1];
+            if (next_i < 0 || next_i >= grid.length || next_j < 0 || next_j >= grid[0].length) continue;
+            dfs2(grid, next_i, next_j);
         }
     }
 
-    private boolean inArea(int x, int y) {
-        return x >= 0 && x < rows && y >= 0 && y < cols;
-    }
-    
 
 }
